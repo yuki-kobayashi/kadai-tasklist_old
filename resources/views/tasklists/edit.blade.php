@@ -3,11 +3,16 @@
 @section('content')
 
     <h1>id: {{ $tasklist->id }} のタスク編集ページ</h1>
+    
+    @include('commons.error_tasklists')
 
         {!! Form::model($tasklist, ['route' => ['tasklists.update', $tasklist->id], 'method' => 'put']) !!}
 
             {!! Form::label('content', 'タスク:') !!}
             {!! Form::text('content') !!}
+            
+            {!! Form::label('status', 'ステータス:') !!}
+            {!! Form::text('status') !!}
 
             {!! Form::submit('更新') !!}
 
