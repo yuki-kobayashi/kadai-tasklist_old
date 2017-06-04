@@ -10,7 +10,7 @@
         <div class="col-xs-12">
         <div class="col-sm-offset-2 col-sm-8">
         <div class="col-md-offset-2 col-md-8">
-        <div class="col-lg-offset-3 col-md-6">
+        <div class="col-lg-offset-3 col-lg-6">
             {!! Form::model($tasklist, ['route' => 'tasklists.store']) !!}
             
                 <div class="form-group">
