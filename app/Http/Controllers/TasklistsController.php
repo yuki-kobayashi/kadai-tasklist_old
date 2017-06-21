@@ -18,7 +18,10 @@ class TasklistsController extends Controller
      */
     public function index()
     {
-        $tasklists = tasks::all();
+        if (\Auth::check()) {
+            $user = \Auth::user();
+            $tasklists = $user->tasks()->orderBy('created_at', 'desc')->paginate(10);
+        }
         
         return view('tasklists.index', [
             'tasklists' => $tasklists,
@@ -48,15 +51,22 @@ class TasklistsController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'content' => 'required',
             'status' => 'required',
         ]);
+        //dd($request);
+        $request->user()->tasks()->create([
+            'content' => $request->content,
+            'status' => $request->status,
+        ]);
         
-        $tasklist = new tasks;
-        $tasklist->status = $request->status;
-        $tasklist->content = $request->content;
-        $tasklist->save();
+        
+        //$tasklist = new tasks;
+        //$tasklist->status = $request->status;
+        //$tasklist->content = $request->content;
+        //$tasklist->save();
 
-        return redirect('/');
+        return redirect('/tasklists');
     }
 
     /**
